@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [airport]    Script Date: 19/10/2022 12:11:17 a. m. ******/
+/****** Object:  Database [airport]    Script Date: 19/10/2022 5:17:49 p. m. ******/
 CREATE DATABASE [airport]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -80,12 +80,10 @@ ALTER DATABASE [airport] SET QUERY_STORE = OFF
 GO
 USE [airport]
 GO
-/****** Object:  Table [dbo].[clientes]    Script Date: 19/10/2022 12:11:17 a. m. ******/
+/****** Object:  Table [dbo].[clientes]    Script Date: 19/10/2022 5:17:50 p. m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
 GO
 CREATE TABLE [dbo].[clientes](
 	[Cedula] [varchar](50) NOT NULL,
@@ -97,14 +95,10 @@ CREATE TABLE [dbo].[clientes](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[reserva]    Script Date: 19/10/2022 12:11:17 a. m. ******/
+/****** Object:  Table [dbo].[reserva]    Script Date: 19/10/2022 5:17:50 p. m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
 GO
 CREATE TABLE [dbo].[reserva](
 	[idReserva] [int] IDENTITY(1,1) NOT NULL,
@@ -117,14 +111,10 @@ CREATE TABLE [dbo].[reserva](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[silla]    Script Date: 19/10/2022 12:11:17 a. m. ******/
+/****** Object:  Table [dbo].[silla]    Script Date: 19/10/2022 5:17:50 p. m. ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
 GO
 CREATE TABLE [dbo].[silla](
 	[idSilla] [int] IDENTITY(1,1) NOT NULL,
@@ -137,7 +127,21 @@ CREATE TABLE [dbo].[silla](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-SET ANSI_PADDING OFF
+INSERT [dbo].[clientes] ([Cedula], [Nombre], [Correo]) VALUES (N'1001235398', N'Cesar Porto', N'zprex14@gmail.com')
+GO
+SET IDENTITY_INSERT [dbo].[reserva] ON 
+GO
+INSERT [dbo].[reserva] ([idReserva], [idCliente], [idSilla], [Fecha]) VALUES (1, 1001235398, 1, N'20/10/2022')
+GO
+INSERT [dbo].[reserva] ([idReserva], [idCliente], [idSilla], [Fecha]) VALUES (6, 1001234399, 2, N'21/10/2022')
+GO
+INSERT [dbo].[reserva] ([idReserva], [idCliente], [idSilla], [Fecha]) VALUES (7, 1001234499, 5, N'21/10/2022')
+GO
+INSERT [dbo].[reserva] ([idReserva], [idCliente], [idSilla], [Fecha]) VALUES (8, 1001234299, 7, N'21/10/2022')
+GO
+INSERT [dbo].[reserva] ([idReserva], [idCliente], [idSilla], [Fecha]) VALUES (9, 34299, 11, N'30/10/2022')
+GO
+SET IDENTITY_INSERT [dbo].[reserva] OFF
 GO
 SET IDENTITY_INSERT [dbo].[silla] ON 
 GO

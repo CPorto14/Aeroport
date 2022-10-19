@@ -1,10 +1,11 @@
 import sql from 'mssql';
+import config from "../config"
 
 const dbSettings = {
-    user: "root",
-    password: "root",
-    server: "localhost",
-    database: "airport", // cambia el nombre a airport(cesar) o aeroport(jhojan)
+    user: config.dbUser,
+    password: config.dbPassword,
+    server: config.dbServer,
+    database: config.dbDatabase,
     encrypt: true,
     trustServerCertificate: true,
 
@@ -19,3 +20,6 @@ export async function getConnection() {
         console.log(error);
     }
 }
+
+
+export {sql}

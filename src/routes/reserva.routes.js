@@ -1,16 +1,19 @@
 import { Router } from "express"
-import {getReserva} from "../controllers/reserva.controllers"
+import {createNewReserva, deleteReservaById, getReserva, getReservaById, getTotalReserva, updateReservaById} from "../controllers/reserva.controllers"
 
 const router= Router()
 
 router.get('/Reserva',getReserva)
 
-router.post('/Reserva',)
+router.get('/Reserva/count',getTotalReserva)
 
-router.delete('/Reserva',)
+router.post('/Reserva',createNewReserva)
 
-//router.update('/Reserva',) averiguar como hacer update
+router.get('/Reserva/:idReserva',getReservaById)
 
+router.delete('/Reserva/:idReserva',deleteReservaById)
+
+router.put('/Reserva/:idReserva',updateReservaById)
 
 
 export default router

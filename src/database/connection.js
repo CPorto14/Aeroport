@@ -4,7 +4,7 @@ const dbSettings = {
     user: "root",
     password: "root",
     server: "localhost",
-    database: "aeroport", // cambia el nombre a airport
+    database: "airport", // cambia el nombre a airport(cesar) o aeroport(jhojan)
     encrypt: true,
     trustServerCertificate: true,
 

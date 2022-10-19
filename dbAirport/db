@@ -1,0 +1,249 @@
+USE [master]
+GO
+/****** Object:  Database [airport]    Script Date: 19/10/2022 12:11:17 a. m. ******/
+CREATE DATABASE [airport]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'airport', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\airport.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'airport_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\airport_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT
+GO
+ALTER DATABASE [airport] SET COMPATIBILITY_LEVEL = 150
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [airport].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [airport] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [airport] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [airport] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [airport] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [airport] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [airport] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [airport] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [airport] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [airport] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [airport] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [airport] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [airport] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [airport] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [airport] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [airport] SET  DISABLE_BROKER 
+GO
+ALTER DATABASE [airport] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [airport] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [airport] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [airport] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [airport] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [airport] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [airport] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [airport] SET RECOVERY SIMPLE 
+GO
+ALTER DATABASE [airport] SET  MULTI_USER 
+GO
+ALTER DATABASE [airport] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [airport] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [airport] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [airport] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [airport] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [airport] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+ALTER DATABASE [airport] SET QUERY_STORE = OFF
+GO
+USE [airport]
+GO
+/****** Object:  Table [dbo].[clientes]    Script Date: 19/10/2022 12:11:17 a. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[clientes](
+	[Cedula] [varchar](50) NOT NULL,
+	[Nombre] [varchar](50) NOT NULL,
+	[Correo] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Clientes] PRIMARY KEY CLUSTERED 
+(
+	[Cedula] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[reserva]    Script Date: 19/10/2022 12:11:17 a. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[reserva](
+	[idReserva] [int] IDENTITY(1,1) NOT NULL,
+	[idCliente] [int] NOT NULL,
+	[idSilla] [int] NOT NULL,
+	[Fecha] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_reserva_1] PRIMARY KEY CLUSTERED 
+(
+	[idSilla] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[silla]    Script Date: 19/10/2022 12:11:17 a. m. ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[silla](
+	[idSilla] [int] IDENTITY(1,1) NOT NULL,
+	[ubicacion] [varchar](50) NOT NULL,
+	[tipo] [varchar](50) NOT NULL,
+	[costo] [int] NOT NULL,
+ CONSTRAINT [PK_silla] PRIMARY KEY CLUSTERED 
+(
+	[idSilla] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[silla] ON 
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (1, N'ventana', N'ejecutiva', 80000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (2, N'pasillo', N'ejecutiva', 80000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (5, N'pasillo', N'ejecutiva', 80000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (7, N'ventana', N'ejecutiva', 80000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (8, N'ventana', N'ejecutiva', 80000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (9, N'pasillo', N'ejecutiva', 80000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (10, N'pasillo', N'ejecutiva', 80000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (11, N'ventana', N'ejecutiva', 80000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (12, N'ventana', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (13, N'medio', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (15, N'pasillo', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (16, N'pasillo', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (17, N'medio', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (18, N'ventana', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (19, N'ventana', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (20, N'medio', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (21, N'pasillo', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (22, N'pasillo', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (23, N'medio', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (24, N'ventana', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (25, N'ventana', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (26, N'medio', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (27, N'pasillo', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (28, N'pasillo', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (29, N'medio', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (30, N'ventana', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (31, N'ventana', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (32, N'medio', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (33, N'pasillo', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (34, N'pasillo', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (35, N'medio', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (36, N'ventana', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (37, N'ventana', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (38, N'medio', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (39, N'pasillo', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (40, N'pasillo', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (41, N'medio', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (42, N'ventana', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (43, N'ventana', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (44, N'medio', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (45, N'pasillo', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (46, N'pasillo', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (47, N'medio', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (48, N'ventana', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (49, N'ventana', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (50, N'medio', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (51, N'pasillo', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (52, N'pasillo', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (53, N'medio', N'economica', 45000)
+GO
+INSERT [dbo].[silla] ([idSilla], [ubicacion], [tipo], [costo]) VALUES (54, N'ventana', N'economica', 45000)
+GO
+SET IDENTITY_INSERT [dbo].[silla] OFF
+GO
+USE [master]
+GO
+ALTER DATABASE [airport] SET  READ_WRITE 
+GO

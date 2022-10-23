@@ -10,7 +10,7 @@ export const getReserva = async (req, res) => {
         const result = await pool.request().query(queries.getAllReserva)
         res.json(result.recordset)
     } catch (error) {
-        res.status(500)
+        res.status(400)
         res.send(error.message);
     }
 }
@@ -89,24 +89,24 @@ export const getTotalReserva = async (req, res) => {
 }
 
 
-export const updateReservaById = async (req,res) => {
-    
+export const updateReservaById = async (req, res) => {
+
     const { idSilla, Fecha } = req.body
-    const {idReserva}= req.params
-   
-   
-    if ( idSilla == null || Fecha == null) {
+    const { idReserva } = req.params
+
+
+    if (idSilla == null || Fecha == null) {
 
         return res.status(400).json({ msg: "Bad request. Plese fill all fields" })
     }
 
-    const pool= await getConnection()
+    const pool = await getConnection()
     await pool.request()
-    .input("idSilla", sql.Int, idSilla)
-    .input("Fecha", sql.VarChar, Fecha)
-    .input("idReserva",sql.Int, idReserva)
-    .query(queries.updateReservaById)
+        .input("idSilla", sql.Int, idSilla)
+        .input("Fecha", sql.VarChar, Fecha)
+        .input("idReserva", sql.Int, idReserva)
+        .query(queries.updateReservaById)
 
-    res.json({ idSilla, Fecha})
+    res.json({ idSilla, Fecha })
 
 }

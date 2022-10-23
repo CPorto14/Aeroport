@@ -2,6 +2,7 @@ import express from 'express'
 import config from './config'
 import sillaRoute from './routes/silla.routes'
 import reservaRoute from './routes/reserva.routes'
+import clienteRoute from './routes/clientes.routes'
 
 const app = express()
 
@@ -15,5 +16,6 @@ app.use(express.urlencoded({ extended:false }))
 
 app.use(sillaRoute)
 app.use(reservaRoute)
+app.use(clienteRoute)
 
 export default app

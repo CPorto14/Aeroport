@@ -20,7 +20,7 @@ export const createNewClientes = async (req, res) => {
 
     if (Cedula == null || Nombre == null || Correo == null) {
 
-        return res.status(400).json({ msg: "Bad request. Plese fill all fields" })
+        return res.status(400).json({ msg: "Bad reqquest. Plese fill all fields" })
     }
 
 

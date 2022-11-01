@@ -9,7 +9,7 @@ router.get('/cliente',getClientes)
 
 router.get('/cliente/count',getTotalClientes)
 
-router.post('/cliente',createNewClientes)
+router.post('/cliente/create',createNewClientes)
 
 router.get('/cliente/:Cedula',getClientesById)
 

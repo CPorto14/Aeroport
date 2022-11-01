@@ -19,7 +19,7 @@ export const createNewReserva = async (req, res) => {
 
     const { idCliente, idSilla, Fecha } = req.body
 
-    if (idCliente == null || idSilla == null || Fecha == null) {
+    if (idCliente == null || idSilla == null || Fecha == null ) {
 
         return res.status(400).json({ msg: "Bad request. Plese fill all fields" })
     }
@@ -28,21 +28,17 @@ export const createNewReserva = async (req, res) => {
     let {fecha}=req.body
     if (Fecha == null) Fecha =0;
     */
-    try {
-        const poll = await getConnection()
-        await poll.request()
-            .input("idCliente", sql.Int, idCliente)
-            .input("idSilla", sql.Int, idSilla)
-            .input("Fecha", sql.VarChar, Fecha)
-            .query(queries.addNewReserva)
+    
+    const poll = await getConnection()
+    await poll.request()
+        .input("idCliente", sql.VarChar, idCliente)
+        .input("idSilla", sql.VarChar, idSilla)
+        .input("fecha", sql.VarChar, Fecha)
+        .query(queries.addNewReserva)
 
-        res.json({ idCliente, idSilla, Fecha })
+    res.json({ idCliente, idSilla, Fecha })
 
-    } catch (error) {
-
-        res.status(500)
-        res.send(error.message);
-    }
+    
 }
 
 export const getReservaById = async (req, res) => {

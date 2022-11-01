@@ -1,5 +1,5 @@
-import Sillas from '../App';
-import CrearReserva from '../CrearReserva';
+import Sillas from '../components/sillas/App';
+import CrearReserva from '../components/reserva/CrearReserva';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 

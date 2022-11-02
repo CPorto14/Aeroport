@@ -1,23 +1,50 @@
 import { textTransforms } from "@nextui-org/react";
 import { useState, useEffect } from "react";
+import { Busy, Load } from '../../services/reservas'
+
 
 const Ocupada = (props) => {
-    let seats = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26]
-    let ocupadas = [1,2,3,4,5,6,7,8,45,26,30]
+
+
+    let seats = []
+    let ocupadas = []
+
+    const [ocupada, setOcupada] = useState([]);
+    const [reservas, setReservas] = useState([]);
+
+
+    useEffect(() => {
+        Load(setReservas);
+        Busy(setOcupada);
+    }, [])
+
     
-    const [ocupada, setOcupada] = useState([])
-    
-    
+
+    reservas.map((reservas) => (
+        seats.push(reservas.idSilla)
+
+    ))
+
+
+    let dato = 0
+
+    ocupada.map((ocupada) => (
+        ocupadas.push(parseInt(ocupada.idSilla))
+
+    ))
+
+
+
 
     function verificar() {
         let check = false
         for (let i = 0; i < seats.length; i++) {
-            if(props.id === ocupadas[i]){
+            if (props.id === ocupadas[i]) {
                 check = true
                 return 'silla2'
             }
         }
-        if (check === false){
+        if (check === false) {
             return 'silla'
         }
     }
@@ -25,17 +52,17 @@ const Ocupada = (props) => {
     function verifica2() {
         let check = false
         for (let i = 0; i < seats.length; i++) {
-            if(props.id === ocupadas[i]){
+            if (props.id === ocupadas[i]) {
                 check = true
                 return props.id
             }
         }
-        if (check === false){
+        if (check === false) {
             return props.id
         }
-        
+
     }
-    
+
     return (
         <div class={verificar()}>{verifica2()}</div>
     )

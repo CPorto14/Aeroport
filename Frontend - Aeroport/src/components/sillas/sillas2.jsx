@@ -1,10 +1,13 @@
 import React, { Fragment } from 'react';
-import { useState } from "react";
 import axios from 'axios';
 import { Button } from '@chakra-ui/react';
 import swal from 'sweetalert';
+import { Load } from '../../services/reservas'
+import { useState, useEffect } from "react";
 
 
+
+let count = [];
 
 const Muestra = (props) => {
     const [regDetails, setRegDetails] = useState({  // User 1
@@ -13,8 +16,36 @@ const Muestra = (props) => {
         document: "",
     });
 
+    const [reservas, setReservas] = useState([]);
+
+    reservas.map((reservas) => (
+        count.push(reservas)
+    ))
+    let ubicacion = ''
+    let tipo = ''
+    let costo = ''
+    for (let index = 0; index < count.length; index++) {
+        if (count[index].idSilla === props.id) {
+            ubicacion = count[index].ubicacion;
+            tipo = count[index].tipo;
+            costo = count[index].costo;
+            break;
+        }
+    }
+    
+
+
+
+
+
+    useEffect(() => {
+        Load(setReservas);
+    }, [])
+
+
+
     const guardar = () => {
-        if(regDetails.document === '' || regDetails.email === '' || regDetails.name === ''){
+        if (regDetails.document === '' || regDetails.email === '' || regDetails.name === '') {
             swal({
                 title: 'Por favor llene todos los campos',
                 text: 'Todos los campos son obligatorios',
@@ -22,14 +53,14 @@ const Muestra = (props) => {
                 button: 'Aceptar',
                 timer: '3000'
             })
-        }else{
+        } else {
             createReservation();
             CreateUser();
         }
-        
+
     }
 
-    function clear(){
+    function clear() {
         setRegDetails(regDetails.document = regDetails.document = '');
         setRegDetails(regDetails.name = regDetails.name = '');
         setRegDetails(regDetails.email = regDetails.email = '');
@@ -38,8 +69,8 @@ const Muestra = (props) => {
     async function createReservation() {
         const tiempoTranscurrido = Date.now();
         const hoy = new Date(tiempoTranscurrido);
-        
-        let reservation = { idCliente: regDetails.document, idSilla: String(props.id), Fecha: hoy.toDateString()}
+
+        let reservation = { idCliente: regDetails.document, idSilla: String(props.id), Fecha: hoy.toDateString() }
         console.log("reservaaaaaaaaa")
         console.log(reservation);
 
@@ -73,53 +104,64 @@ const Muestra = (props) => {
     }
 
     return (
-        <div className="login-container">
+        <>
 
-            <h2 style={{ textAlign: "center" }}>Reservar silla {props.id}</h2>
-            <div className="register-form-container">
-                <h2>Información de contacto</h2>
-                <form className="register-form">
-                    <label htmlFor="">Nombre completo</label>
-                    <input
-                        required
-                        type="text"
-                        placeholder="Nombre completo"
-                        value={regDetails.name}
-                        onChange={(e) =>
-                            setRegDetails({ ...regDetails, name: e.target.value })
-                        }
-                    />
+            <div className="login-container">
 
-                    <label htmlFor="">Correo electronico</label>
-                    <input
-                        required
-                        type="email"
-                        placeholder="Correo electronico"
-                        value={regDetails.email}
-                        onChange={(e) =>
-                            setRegDetails({ ...regDetails, email: e.target.value })
-                        }
-                    />
-                    <label htmlFor="">Número de documento</label>
-                    <input
-                        required
-                        type="text"
-                        placeholder="Documento"
-                        value={regDetails.document}
-                        onChange={(e) =>
-                            setRegDetails({ ...regDetails, document: e.target.value })
-                        }
-                    />
-                    <Button
-                        style={{ marginTop: "20px" }}
-                        color="primary"
-                        onClick={guardar}
-                    >
-                        Confirmar Reserva
-                    </Button>
-                </form>
+                <h2 style={{ textAlign: "center" }}>Reservar silla {props.id}</h2>
+                <div className="register-form-container">
+                    <h2>Información de la silla</h2>
+                    <h3>Ubicación: {ubicacion}</h3>
+                    <h3>Tipo: {tipo}</h3>
+                    <h3><strong>Costo: {costo}</strong></h3>
+
+
+                </div>
+                <div className="register-form-container">
+                    <h2>Información de contacto</h2>
+                    <form className="register-form">
+                        <label htmlFor="">Nombre completo</label>
+                        <input
+                            required
+                            type="text"
+                            placeholder="Nombre completo"
+                            value={regDetails.name}
+                            onChange={(e) =>
+                                setRegDetails({ ...regDetails, name: e.target.value })
+                            }
+                        />
+
+                        <label htmlFor="">Correo electronico</label>
+                        <input
+                            required
+                            type="email"
+                            placeholder="Correo electronico"
+                            value={regDetails.email}
+                            onChange={(e) =>
+                                setRegDetails({ ...regDetails, email: e.target.value })
+                            }
+                        />
+                        <label htmlFor="">Número de documento</label>
+                        <input
+                            required
+                            type="text"
+                            placeholder="Documento"
+                            value={regDetails.document}
+                            onChange={(e) =>
+                                setRegDetails({ ...regDetails, document: e.target.value })
+                            }
+                        />
+                        <Button
+                            style={{ marginTop: "20px" }}
+                            color="primary"
+                            onClick={guardar}
+                        >
+                            Confirmar Reserva
+                        </Button>
+                    </form>
+                </div>
             </div>
-        </div>
+        </>
     )
 };
 
